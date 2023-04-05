@@ -14,6 +14,8 @@ namespace MegaMart.Application.Products.Commands.CreateProduct
             RuleFor(x => x.Price).NotEmpty().LessThan(500);
 
             RuleFor(x => x.Category).IsInEnum();
+
+            RuleFor(x => x.Quantity).NotEmpty().LessThan(1000);
         }
     }
 }

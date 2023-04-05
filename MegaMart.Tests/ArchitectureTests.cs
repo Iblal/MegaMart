@@ -55,7 +55,7 @@ public class ArchitectureTests
         var testResult = Types
             .InAssembly(assembly)
             .ShouldNot()
-            .HaveDependencyOnAll(otherProjects)
+            .HaveDependencyOnAny(otherProjects)
             .GetResult();
 
         // Assert
@@ -97,7 +97,7 @@ public class ArchitectureTests
         var testResult = Types
             .InAssembly(assembly)
             .ShouldNot()
-            .HaveDependencyOnAll(otherProjects)
+            .HaveDependencyOnAny(otherProjects)
             .GetResult();
 
         // Assert
@@ -122,7 +122,7 @@ public class ArchitectureTests
         var testResult = Types
             .InAssembly(assembly)
             .ShouldNot()
-            .HaveDependencyOnAll(otherProjects)
+            .HaveDependencyOnAny(otherProjects)
             .GetResult();
 
         // Assert
@@ -137,6 +137,7 @@ public class ArchitectureTests
 
         var otherProjects = new[]
         {
+            PersistenceNamespace,
             InfrastructureNamespace,
             WebNamespace
         };
@@ -145,7 +146,7 @@ public class ArchitectureTests
         var testResult = Types
             .InAssembly(assembly)
             .ShouldNot()
-            .HaveDependencyOnAll(otherProjects)
+            .HaveDependencyOnAny(otherProjects)
             .GetResult();
 
         // Assert

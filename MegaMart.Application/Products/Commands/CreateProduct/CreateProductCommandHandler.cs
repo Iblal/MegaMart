@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using MegaMart.Application.Abstractions.Messaging;
 using MegaMart.Domain.Entities;
+using MegaMart.Domain.Errors;
 using MegaMart.Domain.Repositories;
 using MegaMart.Domain.Shared;
 
@@ -22,6 +23,11 @@ namespace MegaMart.Application.Products.Commands.CreateProduct
 
         public async Task<Result> Handle(CreateProductCommand request, CancellationToken cancellationToken)
         {
+            if (await _productRepository.CheckProductNameExistsAsync(request.Name))
+            {
+                return Result.Failure<Product>(DomainErrors.Product.ProductNameExists);
+            }
+
             var product = Product.Create(
                 Guid.NewGuid(),
                 request.Name,

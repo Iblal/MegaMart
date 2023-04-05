@@ -6,6 +6,8 @@ namespace MegaMart.Domain.Repositories
     {
         Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
+        Task<bool> CheckProductNameExistsAsync(string name);
+
         void Add(Product product);
     }
 }

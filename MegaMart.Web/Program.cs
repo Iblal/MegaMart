@@ -6,9 +6,6 @@ using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddRazorPages();
-
 var connectionString = builder.Configuration.GetValue<string>("ConnectionString");
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
