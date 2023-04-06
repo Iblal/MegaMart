@@ -2,9 +2,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using MegaMart.Application.Products.Commands.CreateProduct;
-using MegaMart.Domain.Enums;
-using MegaMart.Domain.Entities;
 using MegaMart.Domain.Shared;
+using MegaMart.Application.Products.Queries.GetProductById;
 
 namespace MegaMart.Presentation.Controllers
 {
@@ -17,10 +16,8 @@ namespace MegaMart.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateProduct(CreateProductCommand command, CancellationToken cancellationToken)
         {
-            var command = new CreateProductCommand("ProductName2", "ProductDescription2", 87.18, 4, (ProductCategory)Enum.Parse(typeof(ProductCategory), "1"));
-
             var result = await Sender.Send(command, cancellationToken);
 
             return result.IsSuccess ? Ok("Product added succesfully.") : HandleFailure(result);
@@ -31,7 +28,7 @@ namespace MegaMart.Presentation.Controllers
         {
             var query = new GetProductByIdQuery(id);
 
-            Result<MemberResponse> response = await Sender.Send(query, cancellationToken);
+            Result<ProductResponse> response = await Sender.Send(query, cancellationToken);
 
             return response.IsSuccess ? Ok(response.Value) : NotFound(response.Error);
         }

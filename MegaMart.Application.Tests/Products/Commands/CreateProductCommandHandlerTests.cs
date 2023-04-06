@@ -8,7 +8,7 @@ using MegaMart.Domain.Enums;
 using Moq;
 using Xunit;
 
-namespace MegaMart.Application.UnitTests.Members.Commands;
+namespace MegaMart.Application.Tests.Products.Commands;
 
 public class CreateProductCommandHandlerTests
 {

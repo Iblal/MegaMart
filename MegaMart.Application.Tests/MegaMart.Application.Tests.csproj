@@ -10,6 +10,7 @@
 
   <ItemGroup>
     <PackageReference Include="FluentAssertions" Version="6.10.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.2" />
     <PackageReference Include="Moq" Version="4.18.4" />
     <PackageReference Include="MSTest.TestAdapter" Version="2.2.10" />
@@ -25,6 +26,11 @@
   <ItemGroup>
     <ProjectReference Include="..\MegaMart.Application\MegaMart.Application.csproj" />
     <ProjectReference Include="..\MegaMart.Domain\MegaMart.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Users\Commands\" />
+    <Folder Include="Users\Queries\" />
   </ItemGroup>
 
 </Project>
