@@ -1,11 +1,15 @@
 ﻿using MegaMart.Domain.Primitives;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 
 namespace MegaMart.Domain.Entities
 {
     public sealed class Order : Entity
     {
-        public Order(Guid id) : base(id)
+        private readonly List<OrderItemQuantity> _orderItemQuantity = new();
+
+        private Order(Guid id) 
+            : base(id)
         {
 
         }
@@ -15,6 +19,8 @@ namespace MegaMart.Domain.Entities
         public string ShippingAddress { get; private set; }
 
         public decimal Total { get; private set; }
+
+        public IReadOnlyCollection<OrderItemQuantity> OrderItemQuantity => _orderItemQuantity;
 
     }
 }

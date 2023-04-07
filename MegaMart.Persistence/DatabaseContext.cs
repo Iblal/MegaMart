@@ -13,5 +13,9 @@ namespace MegaMart.Persistence
 
         public DbSet<Product> Products { get; set; }
 
+        public DbSet<Order> Order { get; set; }
+
+        public DbSet<OrderItemQuantity> OrderItemQuantity { get; set; }
+
     }
 }
