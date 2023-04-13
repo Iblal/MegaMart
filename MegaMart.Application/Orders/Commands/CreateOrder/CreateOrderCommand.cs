@@ -4,14 +4,12 @@
 namespace MegaMart.Application.Orders.Commands.CreateOrder
 {
     public sealed record CreateOrderCommand(
-        string currentUserId,
         string ShippingAddress,
-        List<OrderItem> Items
+        List<OrderItemCommand> OrderItems
     ) : ICommand;
 
-    public sealed record OrderItem(
-    Guid ProductId,
-    int Quantity
-    );
+    public sealed record OrderItemCommand(
+        Guid productId,
+        int Quantity); 
 
 }

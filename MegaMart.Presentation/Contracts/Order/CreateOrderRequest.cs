@@ -2,12 +2,11 @@
 {
     public sealed record CreateOrderRequest(
         string ShippingAddress,
-        List<OrderItemRequest> Items
+        List<OrderItemRequest> OrderItems
     );
 
     public sealed record OrderItemRequest(
-    Guid ProductId,
-    int Quantity
-    );
+    Guid productId,
+    int quantity);
 
 }

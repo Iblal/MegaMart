@@ -6,14 +6,21 @@ namespace MegaMart.Domain.Entities
 {
     public sealed class Product : Entity
     {
-        private Product(Guid id, string name, string description, double price, int quantity, ProductCategory category)
+        private Product(Guid id, string name, string description,
+            double price, int stock, ProductCategory category, DateTime createdDateTime)
         : base(id)
         {
             Name = name;
             Description = description;
             Price = price;
-            Quantity = quantity;
+            Stock = stock;
             Category = category;
+            CreatedDate = createdDateTime;
+        }
+
+        private Product()
+        : base(Guid.NewGuid())
+        {
         }
 
         public string Name { get; private set; }
@@ -22,15 +29,18 @@ namespace MegaMart.Domain.Entities
 
         public string Description { get; private set; }
 
-        public int Quantity { get; private set; }
+        public int Stock { get; private set; }
 
         public double Price { get; private set; }
+
+        public DateTime CreatedDate { get; private set; }
+
 
         public static Product Create(
             Guid id, string name, 
             string description, 
             double price, 
-            int quantity, 
+            int stock, 
             ProductCategory category
             )
         {
@@ -39,11 +49,17 @@ namespace MegaMart.Domain.Entities
                 name,
                 description,
                 price, 
-                quantity, 
-                category
+                stock, 
+                category,
+                DateTime.Now
                 );
 
             return product;
+        }
+
+        public void UpdateStock(int quantity)
+        {
+            Stock -= quantity;
         }
     }
 }

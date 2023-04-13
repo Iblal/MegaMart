@@ -20,24 +20,22 @@ namespace MegaMart.Application.Members.Login
             _userManager = userManager;
         }
 
-        public async Task<Result> Handle(
-            LoginCommand request,
-            CancellationToken cancellationToken)
+        public async Task<Result> Handle(LoginCommand command, CancellationToken cancellationToken)
         {
 
-            User? user = await _userManager.FindByEmailAsync(request.Email);
+            User? user = await _userManager.FindByEmailAsync(command.Email);
 
             if (user is null) 
             {
-                return Result.Failure<string>(DomainErrors.User.InvalidCredentials);
+                return Result.Failure<string>(DomainErrors.UserErrors.InvalidCredentials);
             }
 
             // Use SignInManager to authenticate user
-            var signInResult = await _signInManager.PasswordSignInAsync(user, request.Password, isPersistent: true, lockoutOnFailure: false);
+            var signInResult = await _signInManager.PasswordSignInAsync(user, command.Password, isPersistent: true, lockoutOnFailure: false);
             if (!signInResult.Succeeded)
             {
                 // Handle failed login attempt, return error response
-                return Result.Failure<string>(DomainErrors.User.InvalidCredentials);
+                return Result.Failure<string>(DomainErrors.UserErrors.InvalidCredentials);
             }
 
             // Return success with user email

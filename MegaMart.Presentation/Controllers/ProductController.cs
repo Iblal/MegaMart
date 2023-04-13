@@ -16,9 +16,9 @@ namespace MegaMart.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(CreateProductCommand command, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateProduct(CreateProductCommand request, CancellationToken cancellationToken)
         {
-            var result = await Sender.Send(command, cancellationToken);
+            var result = await Sender.Send(request, cancellationToken);
 
             return result.IsSuccess ? Ok("Product added succesfully.") : HandleFailure(result);
         }

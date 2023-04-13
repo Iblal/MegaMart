@@ -1,12 +1,13 @@
 ﻿using MediatR;
+using MegaMart.Application.Interfaces;
 using MegaMart.Application.Orders.Commands.CreateOrder;
-using MegaMart.Application.Users.Commands.CreateUser;
 using MegaMart.Domain.Entities;
+using MegaMart.Domain.Errors;
+using MegaMart.Domain.Shared;
 using MegaMart.Presentation.Abstractions;
 using MegaMart.Presentation.Contracts.Order;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
 
 namespace MegaMart.Presentation.Controllers
 {
@@ -14,44 +15,21 @@ namespace MegaMart.Presentation.Controllers
 
     public sealed class OrderController : ApiController
     {
+
         public OrderController(ISender sender) 
             : base(sender)
         {
-           
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateOrder([FromBody] CreateOrderRequest request, CancellationToken cancellationToken)
+        public async Task<IActionResult> CreateOrder(CreateOrderCommand request, CancellationToken cancellationToken)
         {
-            string? currentUserId = User.FindFirstValue(ClaimTypes.NameIdentifier); 
 
-            if (string.IsNullOrEmpty(currentUserId))
-            {
-                return BadRequest("You need to login before placing an order");
-            }
+            var result = await Sender.Send(request, cancellationToken);
 
-            var orderItems = new List<OrderItem>();
-
-            
-            foreach (var item in request.Items)
-            {
-                var orderItem = new OrderItem(
-                    item.ProductId,
-                    item.Quantity
-                );
-                orderItems.Add(orderItem);
-            }
-
-            var command = new CreateOrderCommand(
-                currentUserId,
-                request.ShippingAddress,
-                orderItems
-            );
-
-
-            var result = await Sender.Send(command, cancellationToken);
-
-            return result.IsSuccess ? Ok("Product added succesfully.") : HandleFailure(result);
+            return result.IsSuccess ? Ok("Order created successfully.") : HandleFailure(result);
         }
+
+
     }
 }

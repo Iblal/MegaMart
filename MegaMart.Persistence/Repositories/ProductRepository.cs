@@ -14,16 +14,16 @@ namespace MegaMart.Persistence.Repositories
         public void Add(Product product) =>
             _context.Set<Product>().Add(product);
 
-
         public async Task<Product?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) =>
             await _context.Set<Product>()
             .FirstOrDefaultAsync(g => g.Id == id, cancellationToken);
 
         public async Task<bool> CheckProductNameExistsAsync(string name)
         {
-            var product = _context.Set<Product>().FirstOrDefault(g => g.Name == name);
+            var product =  _context.Set<Product>().FirstOrDefault(g => g.Name == name);
 
             return product != null;
         }
+
     }
 }

@@ -15,7 +15,7 @@ public abstract class ApiController : ControllerBase
     protected IActionResult HandleFailure(Result result) =>
         result switch
         {
-            { IsSuccess: true } => throw new InvalidOperationException(),
+            { IsFailure: true } => throw new InvalidOperationException(),
             IValidationResult validationResult =>
                 BadRequest(
                     CreateProblemDetails(

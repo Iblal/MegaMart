@@ -25,7 +25,7 @@ namespace MegaMart.Application.Products.Commands.CreateProduct
         {
             if (await _productRepository.CheckProductNameExistsAsync(request.Name))
             {
-                return Result.Failure<Product>(DomainErrors.Product.ProductNameExists);
+                return Result.Failure(DomainErrors.ProductErrors.NameExists);
             }
 
             var product = Product.Create(
@@ -35,7 +35,7 @@ namespace MegaMart.Application.Products.Commands.CreateProduct
                 request.Price,
                 request.Quantity,
                 request.Category);
-
+                
             _productRepository.Add(product);
 
             await _unitOfWork.SaveChangesAsync(cancellationToken);

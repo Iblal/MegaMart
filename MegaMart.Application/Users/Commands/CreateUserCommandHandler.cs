@@ -22,7 +22,7 @@ namespace MegaMart.Application.Users.Commands.CreateUser
 
             if (userExists is not null)
             {
-                return IdentityResult.Failed(DomainErrors.User.EmailAlreadyRegistered);
+                return IdentityResult.Failed(DomainErrors.UserErrors.EmailAlreadyRegistered);
             }
 
             var user = User.Create(request.Email, request.UserName, request.Password);

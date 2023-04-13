@@ -36,7 +36,7 @@ namespace MegaMart.Application.Tests.Users.Commands
 
             // Assert
             result.Succeeded.Should().BeFalse(); // Expect failure
-            result.Errors.Should().Contain(error => error.Code == DomainErrors.User.EmailAlreadyRegistered.Code); // Expect email already registered error
+            result.Errors.Should().Contain(error => error.Code == DomainErrors.UserErrors.EmailAlreadyRegistered.Code); // Expect email already registered error
         }
 
     }

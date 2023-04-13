@@ -41,7 +41,7 @@ public class CreateProductCommandHandlerTests
 
         // Assert
         result.IsFailure.Should().BeTrue();
-        result.Error.Should().Be(DomainErrors.Product.ProductNameExists);
+        result.Error.Should().Be(DomainErrors.ProductErrors.NameExists);
     }
 
     [Fact]
