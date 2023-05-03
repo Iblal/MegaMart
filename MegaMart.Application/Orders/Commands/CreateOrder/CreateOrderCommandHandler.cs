@@ -56,7 +56,6 @@ namespace MegaMart.Application.Orders.Commands.CreateOrder
                 order.AddOrderItem(product, orderItem.Quantity);
             }
 
-
             order.CalculateTotalAmount();
 
 
