@@ -24,7 +24,7 @@ namespace MegaMart.Presentation.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<IActionResult> GetProductById(Guid id, CancellationToken cancellationToken)
+        public async Task<IActionResult> GetProduct(Guid id, CancellationToken cancellationToken)
         {
             var query = new GetProductByIdQuery(id);
 

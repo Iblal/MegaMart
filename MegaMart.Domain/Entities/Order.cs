@@ -1,17 +1,18 @@
-﻿using MegaMart.Domain.Primitives;
+﻿using MegaMart.Domain.Enums;
+using MegaMart.Domain.Primitives;
 
 namespace MegaMart.Domain.Entities
 {
-    public sealed class Order : Entity
+    public sealed class Order : AggregateRoot
     {
         private readonly List<OrderItem> _orderItems = new();
 
-        private Order(Guid id, User customer, string shippingAddress, DateTime createdDate)
+        private Order(Guid id, User customer, string shippingAddress, DateTime createdDate, OrderStatus status)
             : base(id)
         {
             Customer = customer;
             ShippingAddress = shippingAddress;
-            CreatedDate = createdDate;  
+            CreatedDate = createdDate;
         }
 
         private Order()
@@ -27,6 +28,8 @@ namespace MegaMart.Domain.Entities
 
         public DateTime CreatedDate { get; private set; }
 
+        public OrderStatus Status { get; private set; }
+
         public IReadOnlyCollection<OrderItem> OrderItems => _orderItems;
 
 
@@ -39,12 +42,12 @@ namespace MegaMart.Domain.Entities
                 Guid.NewGuid(),
                 customer,
                 shippingAddress,
-                DateTime.Now
+                DateTime.Now,
+                OrderStatus.Pending
                 );
 
             return order;
         }
-
 
         public void AddOrderItem(Product product, int quantity)
         {

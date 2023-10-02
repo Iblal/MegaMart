@@ -1,6 +1,4 @@
-﻿using MediatR;
-using MegaMart.Domain.Entities;
-using MegaMart.Domain.Primitives;
+﻿using MegaMart.Domain.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

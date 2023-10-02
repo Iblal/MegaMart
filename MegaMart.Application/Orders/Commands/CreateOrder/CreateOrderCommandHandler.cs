@@ -68,6 +68,8 @@ namespace MegaMart.Application.Orders.Commands.CreateOrder
 
             await _unitOfWork.SaveChangesAsync();
 
+            //Send email
+
             return Result.Success();
         }
 

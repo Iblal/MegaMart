@@ -6,8 +6,6 @@ namespace MegaMart.Domain.Repositories
     {
         Task<Order?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
-        Task<List<Order?>> GetCustomerOrder(Guid id);
-
         void Add(Order order);
     }
 }
