@@ -12,7 +12,7 @@ var connectionString = builder.Configuration.GetValue<string>("ConnectionString"
 
 builder.Services.AddDbContext<DatabaseContext>(options => options.UseSqlServer(connectionString));
 
-builder.Services.AddMediatR(MegaMart.Application.AssemblyReference.Assembly);
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(MegaMart.Application.AssemblyReference.Assembly));
 
 builder
     .Services
