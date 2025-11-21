@@ -8,25 +8,13 @@ using static MegaMart.Domain.Errors.DomainErrors;
 
 namespace MegaMart.Application.Orders.Commands.CreateOrder
 {
-    internal sealed class CreateOrderCommandHandler : ICommandHandler<CreateOrderCommand>
+    internal sealed class CreateOrderCommandHandler(IUserAccessor _userAccessor, 
+    UserManager<User> _userManager, 
+    IProductRepository _productRepository, 
+    IOrderRepository _orderRepository,
+    IUnitOfWork _unitOfWork) : ICommandHandler<CreateOrderCommand>
     {
-        private readonly IUserAccessor _userAccessor;
-        private readonly UserManager<User> _userManager;
-        private readonly IOrderRepository _orderRepository;
-        private readonly IProductRepository _productRepository;
-        private readonly IUnitOfWork _unitOfWork;
-
-        public CreateOrderCommandHandler(IUserAccessor userAccessor, UserManager<User> userManager, IOrderRepository orderRepository,
-            IProductRepository productRepository, IUnitOfWork unitOfWork)
-        {
-            _orderRepository = orderRepository;
-            _productRepository = productRepository;
-            _unitOfWork = unitOfWork;
-            _userAccessor = userAccessor;
-            _userManager = userManager;
-
-        }
-
+        
         public async Task<Result> Handle(CreateOrderCommand request, CancellationToken cancellationToken)
         {
             User? customer = await _userManager.GetUserAsync(_userAccessor.User);

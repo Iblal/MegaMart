@@ -1,24 +1,12 @@
 ﻿using MegaMart.Application.Abstractions.Messaging;
 using MegaMart.Domain.Repositories;
 using MegaMart.Domain.Shared;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MegaMart.Application.Products.Queries.GetProductById
 {
-    internal sealed class GetProductByIdQueryHandler
+    internal sealed class GetProductByIdQueryHandler(IProductRepository _productRepository)
         : IQueryHandler<GetProductByIdQuery, ProductResponse>
     {
-        private readonly IProductRepository _productRepository;
-
-        public GetProductByIdQueryHandler(IProductRepository productRepository)
-        {
-            _productRepository = productRepository;
-        }
-
         public async Task<Result<ProductResponse>> Handle(
             GetProductByIdQuery request,
             CancellationToken cancellationToken)
